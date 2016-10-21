@@ -1,10 +1,12 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+from __future__ import absolute_import
 
 # This file is part of Local Scraperlibs.
 
 import warnings
 import os
 from distutils.core import setup
+
 
 def has_external_dependency(name):
     'Check that a non-Python dependency is installed.'
@@ -15,32 +17,36 @@ def has_external_dependency(name):
 
 if not has_external_dependency('pdftohtml'):
     warnings.warn(
-        'Local Scraperlibs requires pdftohtml, but pdftohtml was not found\n'
-        'in the PATH. You probably need to install it.'
+        'scraperwiki.pdftoxml requires pdftohtml, but pdftohtml was not found '
+        'in the PATH. If you wish to use this function, you probably need to '
+        'install pdftohtml.'
     )
 
 config = dict(name='scraperwiki',
-    author='Francis Irving',
-    author_email='francis@scraperwiki.com',
-    description='Local version of ScraperWiki libraries',
-    url='https://github.com/scraperwiki/scraperwiki-python',
-    classifiers=[
-        'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: SQL',
-        'Topic :: Database :: Front-Ends',
-    ],
-    packages=['scraperwiki', 'scraperwiki.runlog'],
-
-    version = '0.3.7',
-    license='GPL',
-   )
+              author='Francis Irving',
+              author_email='francis@sensiblecode.io',
+              description='Local version of ScraperWiki libraries',
+              url='https://github.com/scraperwiki/scraperwiki-python',
+              classifiers=[
+              'Intended Audience :: Developers',
+              'Intended Audience :: Science/Research',
+              'License :: OSI Approved :: '
+              'GNU General Public License v3 or later (GPLv3+)',
+              'Programming Language :: Python :: 2.7',
+              'Programming Language :: Python :: 3.4',
+              'Programming Language :: Python :: 3.5',
+              'Programming Language :: SQL',
+              'Topic :: Database :: Front-Ends',
+              ],
+              packages=['scraperwiki'],
+              version='0.5.1',
+              license='GPL',
+              )
 
 try:
     from setuptools import setup
-    config['install_requires'] = ['dumptruck>=0.1.2', 'requests'],
+    config['install_requires'] = ['requests', 'six',
+                                  'sqlalchemy', 'alembic'],
 except ImportError:
     pass
 
